@@ -26,12 +26,44 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text("data"),
-          Text("data"),
-          Text("dataihuhiuhiuhiuhiuh"),
-        ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(15, 30, 15, 60),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "🖐Добро пожоловать!",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text("Войдите, чтобы пользоваться функциями приложения"),
+              SizedBox(
+                height: 100,
+              ),
+              Text(
+                "Вход по E-mail",
+                style: TextStyle(color: Colors.grey),
+              ),
+              TextField(
+                decoration: InputDecoration(border: OutlineInputBorder()),
+              ),
+              SizedBox(
+                height: 200,
+              ),
+              Text("Или войдите с поомощью"),
+              OutlinedButton(
+                onPressed: () {},
+                child: Text(
+                  "Войти с Яндекс",
+                ),
+                style: ButtonStyle(maximumSize: Size.fromHeight(100)),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
