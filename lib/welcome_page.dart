@@ -24,37 +24,45 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(15, 30, 15, 60),
+          padding: const EdgeInsets.fromLTRB(15, 30, 15, 60),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "🖐Добро пожоловать!",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Text("Войдите, чтобы пользоваться функциями приложения"),
-                  SizedBox(
+                  const Text(
+                      "Войдите, чтобы пользоваться функциями приложения"),
+                  const SizedBox(
                     height: 100,
                   ),
-                  Text(
+                  const Text(
                     "Вход по E-mail",
                     style: TextStyle(color: Colors.grey),
                   ),
-                  TextField(
+                  const TextField(
                     decoration: InputDecoration(border: OutlineInputBorder()),
                   ),
+                  Container(
+                    width: double.infinity,
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: const Text("Далее"),
+                    ),
+                  )
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Или войдите с поомощью",
                     style: TextStyle(color: Colors.grey),
                   ),
@@ -62,7 +70,7 @@ class MyHomePage extends StatelessWidget {
                     width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         "Войти с Яндекс",
                         style: TextStyle(color: Colors.black),
                       ),
