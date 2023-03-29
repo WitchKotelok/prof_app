@@ -1,9 +1,42 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class WriteCode extends StatelessWidget {
-  const WriteCode({super.key});
+class WriteCode extends StatefulWidget {
+  WriteCode({super.key});
+
+  @override
+  State<WriteCode> createState() => _WriteCodeState();
+}
+
+class _WriteCodeState extends State<WriteCode> {
+  int _start = 60;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {});
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,53 +74,43 @@ class WriteCode extends StatelessWidget {
               ),
             ),
             Container(
+              height: 30,
+            ),
+            Container(
               width: 250,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 216, 216, 216),
+                  for (var i in [1, 2, 3, 4])
+                    Container(
+                      width: 50,
+                      height: 50,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide:
+                                BorderSide(width: 0, style: BorderStyle.none),
+                          ),
+                          fillColor: Color.fromARGB(255, 216, 216, 216),
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 216, 216, 216),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 216, 216, 216),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 216, 216, 216),
-                      ),
-                    ),
-                  ),
                 ],
               ),
-            )
+            ),
+            Container(
+              height: 10,
+            ),
+            Text(
+              "Отправить код повторно можно",
+              style: TextStyle(color: Colors.grey),
+            ),
+            Text(
+              "будет через $_start секунд",
+              style: TextStyle(color: Colors.grey),
+            ),
           ],
         ),
       ),
