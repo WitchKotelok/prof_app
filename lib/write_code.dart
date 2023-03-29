@@ -8,58 +8,88 @@ class WriteCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: BackButton(),
-      ),
-      body: Column(
-        children: [
-          Text(
-            "Введите код из E-mail",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.topLeft,
+              child: MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  child: Icon(
+                    Icons.chevron_left,
+                    size: 28,
+                  ),
+                  //
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 216, 216, 216),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                ),
+              ),
             ),
-          ),
-          Row(
-            children: [
-              Container(
-                width: 80,
-                height: 80,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+            Container(
+              height: 150,
+            ),
+            Text(
+              "Введите код из E-mail",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              Container(
-                width: 80,
-                height: 80,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+            ),
+            Container(
+              width: 250,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 216, 216, 216),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                width: 80,
-                height: 80,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 216, 216, 216),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                width: 80,
-                height: 80,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 216, 216, 216),
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromARGB(255, 216, 216, 216),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
