@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
+import 'login_form.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -43,20 +29,7 @@ class MyHomePage extends StatelessWidget {
                   const SizedBox(
                     height: 100,
                   ),
-                  const Text(
-                    "Вход по E-mail",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  const TextField(
-                    decoration: InputDecoration(border: OutlineInputBorder()),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: MaterialButton(
-                      onPressed: () {},
-                      child: const Text("Далее"),
-                    ),
-                  )
+                  LoginForm(),
                 ],
               ),
               Column(
