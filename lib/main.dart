@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prof_app/write_code.dart';
-import 'welcome_page.dart';
+import 'screens/registrate_screen.dart';
+import 'screens/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MakeParol(),
     );
   }
 }

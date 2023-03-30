@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:prof_app/write_code.dart';
+import 'package:prof_app/screens/write_code.dart';
 
 class LoginForm extends StatefulWidget {
   @override
