@@ -43,13 +43,23 @@ class MakeParol extends StatelessWidget {
             Container(
               height: 30,
             ),
-            Row(
-              children: [
-                Consumer<PasswordModel>(
-                  builder: (context, model, _) =>
-                      _buildPasswordCircle(model.isFilled(0)),
-                ),
-              ],
+            // Row(
+            //   children: [
+            //     Consumer<PasswordModel>(
+            //       builder: (context, model, _) =>
+            //           _buildPasswordCircle(model.isFilled(0)),
+            //     ),
+            //   ],
+            // ),
+            SizedBox(height: 50),
+            SizedBox(
+              child: Column(
+                children: [
+                  Row(
+                    children: [],
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -61,11 +71,30 @@ class MakeParol extends StatelessWidget {
     return Container(
       width: 10,
       height: 10,
+      margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.amber,
+        color: isFilled ? Colors.blue : Colors.indigo,
+        border: Border.all(color: Colors.black),
       ),
     );
+  }
+
+  Widget _buildKeyboardButton(BuildContext context, String text,
+      {IconData? icon}) {
+    return Consumer<PasswordModel>(
+        builder: (context, model, _) => Container(
+              child: TextButton(
+                onPressed: () {
+                  if (text.isNotEmpty) {
+                    model.addPasswordDigits(text, context);
+                  } else {
+                    model.removePasswordDigit();
+                  }
+                },
+                child: icon != null ? Icon(icon) : Text(text),
+              ),
+            ));
   }
 }
 
