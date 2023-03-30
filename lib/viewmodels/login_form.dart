@@ -67,7 +67,7 @@ class _LoginFormState extends State<LoginForm> {
             child: ElevatedButton(
               onPressed: (_formKey.currentState?.validate() == true)
                   ? () {
-                      sendPostRequest({"email": _emailController.text});
+                      // registerUser({"email": _emailController.text});
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -88,14 +88,26 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-Future<void> sendPostRequest(Map<String, String> headers) async {
-  final response = await http.post(
-    Uri.parse('https://medic.madskill.ru/api/sendCode'),
-    headers: headers,
-  );
-  if (response.statusCode == 200) {
-    print('Всё ок! Проверяйте почту!');
-  } else {
-    print('Ошибка!!!');
+class WelcomeScreenViewModel extends ChangeNotifier {
+  late String _email;
+  void setEmail(String value) {
+    _email = value;
+    notifyListeners();
+  }
+
+  Future<bool> registerUser() async {
+    final headers = <String, String>{'email': _email};
+    final response = await http.post(
+        Uri.parse('https://medic.madskill.ru/api/sendCode'),
+        headers: headers);
+    return response.statusCode == 200 ? true : false;
   }
 }
+
+// Future<void> sendPostRequest(Map<String, String> headers) async {
+//   if (response.statusCode == 200) {
+//     print('Всё ок! Проверяйте почту!');
+//   } else {
+//     print('Ошибка!!!');
+//   }
+// }
