@@ -5,8 +5,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
-class MakeParol extends StatelessWidget {
+class MakeParol extends StatefulWidget {
   const MakeParol({super.key});
+
+  @override
+  State<MakeParol> createState() => _MakeParolState();
+}
+
+class _MakeParolState extends State<MakeParol> {
+  List<bool> circles = [false, true, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +53,10 @@ class MakeParol extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildPasswordCircle(false),
-                _buildPasswordCircle(false),
-                _buildPasswordCircle(false),
-                _buildPasswordCircle(false),
+                _buildPasswordCircle(circles[0]),
+                _buildPasswordCircle(circles[1]),
+                _buildPasswordCircle(circles[2]),
+                _buildPasswordCircle(circles[3]),
                 // Consumer<PasswordModel>(
                 //   builder: (context, model, _) =>
                 //       _buildPasswordCircle(model.isFilled(0)),
@@ -116,12 +123,20 @@ class MakeParol extends StatelessWidget {
 
   Widget _buildKeyboardButton(BuildContext context, String text,
       {IconData? icon}) {
-    List<String> _passwordDigits = [];
+    List<String> passwordDigits = [];
 
-    return
-        // Consumer<PasswordModel>(
-        //   builder: (context, model, _) =>
-        Container(
+    void addPasswordDigits(String digit, BuildContext context) {
+      if (passwordDigits.length < 4) {
+        passwordDigits.add(digit);
+        if (passwordDigits.length == 4) {
+          //! здесь должен быть переход на экран заполнения профиля
+        } else {
+          setState(() {});
+        }
+      }
+    }
+
+    return Container(
       width: 65,
       height: 65,
       margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -131,11 +146,11 @@ class MakeParol extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          if (text.isNotEmpty) {
-            // model.addPasswordDigits(text, context);
-          } else {
-            // model.removePasswordDigit();
-          }
+          // if (text.isNotEmpty) {
+          //   model.addPasswordDigits(text, context);
+          // } else {
+          //   model.removePasswordDigit();
+          // }
         },
         child: icon != null
             ? Icon(
@@ -152,27 +167,27 @@ class MakeParol extends StatelessWidget {
   }
 }
 
-class PasswordModel extends ChangeNotifier {
-  List<String> _passwordDigits = [];
+// class PasswordModel extends ChangeNotifier {
+//   List<String> _passwordDigits = [];
 
-  bool isFilled(int index) {
-    return _passwordDigits.length > index;
-  }
+//   bool isFilled(int index) {
+//     return _passwordDigits.length > index;
+//   }
 
-  void addPasswordDigits(String digit, BuildContext context) {
-    if (_passwordDigits.length < 4) {
-      _passwordDigits.add(digit);
-      notifyListeners();
-      if (_passwordDigits.length == 4) {
-        //! здесь должен быть переход на экран заполнения профиля
-      }
-    }
-  }
+//   void addPasswordDigits(String digit, BuildContext context) {
+//     if (_passwordDigits.length < 4) {
+//       _passwordDigits.add(digit);
+//       notifyListeners();
+//       if (_passwordDigits.length == 4) {
+//         //! здесь должен быть переход на экран заполнения профиля
+//       }
+//     }
+//   }
 
-  void removePasswordDigit() {
-    if (_passwordDigits.isNotEmpty) {
-      _passwordDigits.removeLast();
-      notifyListeners();
-    }
-  }
-}
+//   void removePasswordDigit() {
+//     if (_passwordDigits.isNotEmpty) {
+//       _passwordDigits.removeLast();
+//       notifyListeners();
+//     }
+//   }
+// }
