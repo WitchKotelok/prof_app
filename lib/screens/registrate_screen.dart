@@ -13,7 +13,8 @@ class MakeParol extends StatefulWidget {
 }
 
 class _MakeParolState extends State<MakeParol> {
-  List<bool> circles = [false, true, false, false];
+  List<bool> circles = [false, false, false, false];
+  int _index = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +147,13 @@ class _MakeParolState extends State<MakeParol> {
       ),
       child: TextButton(
         onPressed: () {
+          if (_index != 4) {
+            _index++;
+            circles[_index] = true;
+          } else {
+            //! переход на другой экран
+          }
+          setState(() {});
           // if (text.isNotEmpty) {
           //   model.addPasswordDigits(text, context);
           // } else {

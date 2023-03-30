@@ -1,9 +1,9 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class WriteCode extends StatefulWidget {
   WriteCode({super.key});
@@ -15,6 +15,12 @@ class WriteCode extends StatefulWidget {
 class _WriteCodeState extends State<WriteCode> {
   int _start = 60;
   Timer? _timer;
+  final _codeControllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
 
   @override
   void initState() {
@@ -82,12 +88,23 @@ class _WriteCodeState extends State<WriteCode> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  for (var i in [1, 2, 3, 4])
+                  for (var index in [1, 2, 3, 4])
                     Container(
                       width: 50,
                       height: 50,
                       child: TextField(
+                        keyboardType: TextInputType.number,
+                        maxLength: 1,
+                        // controller: _codeControllers[index],
+                        onChanged: (value) async {
+                          if (index < _codeControllers.length) {
+                            FocusScope.of(context).nextFocus();
+                          } else {
+                            FocusScope.of(context).unfocus();
+                          }
+                        },
                         decoration: InputDecoration(
+                          counterText: '',
                           filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -96,6 +113,7 @@ class _WriteCodeState extends State<WriteCode> {
                           ),
                           fillColor: Color.fromARGB(255, 216, 216, 216),
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                 ],
