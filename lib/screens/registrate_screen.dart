@@ -43,21 +43,55 @@ class MakeParol extends StatelessWidget {
             Container(
               height: 30,
             ),
-            // Row(
-            //   children: [
-            //     Consumer<PasswordModel>(
-            //       builder: (context, model, _) =>
-            //           _buildPasswordCircle(model.isFilled(0)),
-            //     ),
-            //   ],
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildPasswordCircle(false),
+                _buildPasswordCircle(false),
+                _buildPasswordCircle(false),
+                _buildPasswordCircle(false),
+                // Consumer<PasswordModel>(
+                //   builder: (context, model, _) =>
+                //       _buildPasswordCircle(model.isFilled(0)),
+                // ),
+              ],
+            ),
             SizedBox(height: 50),
             SizedBox(
+              width: 310,
               child: Column(
                 children: [
                   Row(
-                    children: [],
-                  )
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildKeyboardButton(context, "1"),
+                      _buildKeyboardButton(context, "2"),
+                      _buildKeyboardButton(context, "3"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildKeyboardButton(context, "4"),
+                      _buildKeyboardButton(context, "5"),
+                      _buildKeyboardButton(context, "6"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildKeyboardButton(context, "7"),
+                      _buildKeyboardButton(context, "8"),
+                      _buildKeyboardButton(context, "9"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _buildKeyboardButton(context, "0"),
+                      _buildKeyboardButton(context, "", icon: Icons.backspace),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -74,7 +108,7 @@ class MakeParol extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isFilled ? Colors.blue : Colors.indigo,
+        color: isFilled ? Colors.blue : Colors.white,
         border: Border.all(color: Colors.black),
       ),
     );
@@ -82,19 +116,39 @@ class MakeParol extends StatelessWidget {
 
   Widget _buildKeyboardButton(BuildContext context, String text,
       {IconData? icon}) {
-    return Consumer<PasswordModel>(
-        builder: (context, model, _) => Container(
-              child: TextButton(
-                onPressed: () {
-                  if (text.isNotEmpty) {
-                    model.addPasswordDigits(text, context);
-                  } else {
-                    model.removePasswordDigit();
-                  }
-                },
-                child: icon != null ? Icon(icon) : Text(text),
+    List<String> _passwordDigits = [];
+
+    return
+        // Consumer<PasswordModel>(
+        //   builder: (context, model, _) =>
+        Container(
+      width: 65,
+      height: 65,
+      margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.grey,
+      ),
+      child: TextButton(
+        onPressed: () {
+          if (text.isNotEmpty) {
+            // model.addPasswordDigits(text, context);
+          } else {
+            // model.removePasswordDigit();
+          }
+        },
+        child: icon != null
+            ? Icon(
+                icon,
+                color: Colors.white,
+              )
+            : Text(
+                text,
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-            ));
+      ),
+      // ),
+    );
   }
 }
 
