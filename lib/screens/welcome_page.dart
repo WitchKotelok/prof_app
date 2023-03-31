@@ -21,14 +21,10 @@ class MyHomePage extends StatelessWidget {
                     "🖐Добро пожоловать!",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                   const Text(
                       "Войдите, чтобы пользоваться функциями приложения"),
-                  const SizedBox(
-                    height: 100,
-                  ),
+                  const SizedBox(height: 100),
                   LoginForm(),
                 ],
               ),
@@ -36,7 +32,7 @@ class MyHomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Или войдите с поомощью",
+                    "Или войдите с помощью",
                     style: TextStyle(color: Colors.grey),
                   ),
                   Container(
@@ -44,7 +40,7 @@ class MyHomePage extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {},
                       child: const Text(
-                        "Войти с Яндекс",
+                        "Войти с Яндекс", // not working now
                         style: TextStyle(color: Colors.black),
                       ),
                     ),

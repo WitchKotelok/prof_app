@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:prof_app/screens/write_code.dart';
+import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
   @override
-  _LoginFormState createState() => _LoginFormState();
+  LoginFormState createState() => LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
@@ -17,13 +18,13 @@ class _LoginFormState extends State<LoginForm> {
     _emailController.addListener(() {
       setState(() {});
     });
-  }
+  } //отслеживает изменения в поле ввода Email
 
   @override
   void dispose() {
     _emailController.dispose();
     super.dispose();
-  }
+  } //
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,8 @@ class _LoginFormState extends State<LoginForm> {
               }
               return null;
             },
+            onSaved: (value) =>
+                context.read<WelcomeScreenViewModel>().setEmail(value!),
             decoration: InputDecoration(
               labelText: 'Вход по E-mail',
               hintText: 'example@example.com',
@@ -65,13 +68,18 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
-              onPressed: (_formKey.currentState?.validate() == true)
+              onPressed: (_formKey.currentState?.validate() ==
+                      true) //! Спросить для чего нужен параметр
                   ? () {
-                      // registerUser({"email": _emailController.text});
+                      _formKey.currentState! //! ->
+                          .save(); //! Спросить что делает эта строка
+                      context.read<WelcomeScreenViewModel>().registerUser();
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => WriteCode(),
+                          builder: (context) =>
+                              WriteCode(email: _emailController.text),
                         ),
                       );
                     }
@@ -96,18 +104,10 @@ class WelcomeScreenViewModel extends ChangeNotifier {
   }
 
   Future<bool> registerUser() async {
-    final headers = <String, String>{'email': _email};
+    final headers = <String, String>{'email': _email}; //email пользователя
     final response = await http.post(
         Uri.parse('https://medic.madskill.ru/api/sendCode'),
-        headers: headers);
+        headers: headers); //код отправленный на почту пользователя
     return response.statusCode == 200 ? true : false;
   }
 }
-
-// Future<void> sendPostRequest(Map<String, String> headers) async {
-//   if (response.statusCode == 200) {
-//     print('Всё ок! Проверяйте почту!');
-//   } else {
-//     print('Ошибка!!!');
-//   }
-// }

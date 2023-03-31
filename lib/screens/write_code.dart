@@ -6,7 +6,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
 class WriteCode extends StatefulWidget {
-  WriteCode({super.key});
+  WriteCode({super.key, required this.email});
+  final String email;
 
   @override
   State<WriteCode> createState() => _WriteCodeState();
@@ -60,47 +61,54 @@ class _WriteCodeState extends State<WriteCode> {
                 child: Container(
                   width: 40,
                   height: 40,
-                  child: Icon(
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 216, 216, 216),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: const Icon(
                     Icons.chevron_left,
                     size: 28,
                   ),
-                  //
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 216, 216, 216),
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 ),
               ),
             ),
-            Container(
-              height: 150,
-            ),
-            Text(
+            Container(height: 150),
+            const Text(
               "Введите код из E-mail",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              height: 30,
-            ),
-            Container(
+            Container(height: 30),
+            SizedBox(
               width: 250,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   for (var index in [1, 2, 3, 4])
-                    Container(
+                    SizedBox(
                       width: 50,
                       height: 50,
                       child: TextField(
                         keyboardType: TextInputType.number,
                         maxLength: 1,
-                        // controller: _codeControllers[index],
                         onChanged: (value) async {
-                          if (index < _codeControllers.length) {
-                            FocusScope.of(context).nextFocus();
-                          } else {
-                            FocusScope.of(context).unfocus();
+                          var code = "";
+                          if (value.isNotEmpty) {
+                            var currentTextFields =
+                                _codeControllers //! уточнить по поводу того
+                                    .map((controller) => controller
+                                        .text) //!  как именно строка сохраняет
+                                    .toList(); //! текущее значение поля для ввода кода
+                            if (currentTextFields
+                                .every((text) => text.isNotEmpty)) {
+                              code = currentTextFields.join();
+                            }
+                            if (index < _codeControllers.length) {
+                              FocusScope.of(context).nextFocus();
+                            } else {
+                              FocusScope.of(context).unfocus();
+                              //!
+                            }
                           }
                         },
                         decoration: InputDecoration(
@@ -108,10 +116,10 @@ class _WriteCodeState extends State<WriteCode> {
                           filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide:
-                                BorderSide(width: 0, style: BorderStyle.none),
+                            borderSide: const BorderSide(
+                                width: 0, style: BorderStyle.none),
                           ),
-                          fillColor: Color.fromARGB(255, 216, 216, 216),
+                          fillColor: const Color.fromARGB(255, 216, 216, 216),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -119,16 +127,14 @@ class _WriteCodeState extends State<WriteCode> {
                 ],
               ),
             ),
-            Container(
-              height: 10,
-            ),
-            Text(
+            Container(height: 10),
+            const Text(
               "Отправить код повторно можно",
               style: TextStyle(color: Colors.grey),
             ),
             Text(
               "будет через $_start секунд",
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
             ),
           ],
         ),
