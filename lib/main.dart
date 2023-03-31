@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
-import 'screens/registrate_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'package:prof_app/viewmodels/login_form.dart';
+import 'package:prof_app/viewmodels/write_code_viewmodel.dart';
+
 import 'screens/welcome_page.dart';
+import 'screens/write_code.dart';
+import 'screens/registrate_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => WelcomeScreenViewModel()),
+        ChangeNotifierProvider(create: (_) => WriteCodeViewModel()),
+      ],
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,11 +25,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: Scaffold(body: MyHomePage()),
     );
   }
 }
