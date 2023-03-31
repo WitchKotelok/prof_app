@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../viewmodels/write_code_viewmodel.dart';
+
 class WriteCode extends StatefulWidget {
   WriteCode({super.key, required this.email});
   final String email;
