@@ -1,15 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodels/write_code_viewmodel.dart';
 
 class WriteCode extends StatefulWidget {
-  WriteCode({super.key, required this.email});
   final String email;
+  WriteCode({Key? key, required this.email}) : super(key: key);
 
   @override
   State<WriteCode> createState() => _WriteCodeState();
@@ -27,7 +24,6 @@ class _WriteCodeState extends State<WriteCode> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     startTimer();
   }
@@ -109,7 +105,9 @@ class _WriteCodeState extends State<WriteCode> {
                               FocusScope.of(context).nextFocus();
                             } else {
                               FocusScope.of(context).unfocus();
-                              //!
+                              context
+                                  .read<WriteCodeViewModel>()
+                                  .signIn(widget.email, code);
                             }
                           }
                         },
