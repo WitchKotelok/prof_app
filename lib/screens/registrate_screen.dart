@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
+import 'card_screen.dart';
 
 class MakeParol extends StatefulWidget {
   const MakeParol({super.key});
@@ -152,12 +153,15 @@ class _MakeParolState extends State<MakeParol> {
           if (text.isNotEmpty) {
             addPasswordDigits(text, context);
             setState(() {});
-            if (_index != 4) {
+            if (_index < 3) {
               _index++;
               circles[_index] = true;
               parol += text;
             } else {
-              //* next screen
+              circles[_index] = true;
+              parol += text;
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => CardUser()));
             }
           } else {
             print(16);
