@@ -16,6 +16,7 @@ class MakeParol extends StatefulWidget {
 class _MakeParolState extends State<MakeParol> {
   List<bool> circles = [false, false, false, false];
   String parol = "";
+  List<String> passwordDigits = [];
   int _index = -1;
 
   @override
@@ -102,6 +103,7 @@ class _MakeParolState extends State<MakeParol> {
                       _buildKeyboardButton(context, "", icon: Icons.backspace),
                     ],
                   ),
+                  Text(parol)
                 ],
               ),
             ),
@@ -126,8 +128,6 @@ class _MakeParolState extends State<MakeParol> {
 
   Widget _buildKeyboardButton(BuildContext context, String text,
       {IconData? icon}) {
-    List<String> passwordDigits = [];
-
     void addPasswordDigits(String digit, BuildContext context) {
       if (passwordDigits.length < 4) {
         passwordDigits.add(digit);
@@ -149,15 +149,24 @@ class _MakeParolState extends State<MakeParol> {
       ),
       child: TextButton(
         onPressed: () {
-          addPasswordDigits(text, context);
-          setState(() {});
-          if (_index != 4) {
-            _index++;
-            circles[_index] = true;
-            parol += text;
+          if (text.isNotEmpty) {
+            addPasswordDigits(text, context);
+            setState(() {});
+            if (_index != 4) {
+              _index++;
+              circles[_index] = true;
+              parol += text;
+            } else {
+              //* next screen
+            }
           } else {
-            //! переход на другой экран
+            print(16);
+            circles[_index] = false;
+            parol = parol.substring(0, _index);
+            _index--;
+            setState(() {});
           }
+
           // if (text.isNotEmpty) {
           //   model.addPasswordDigits(text, context);
           // } else {
