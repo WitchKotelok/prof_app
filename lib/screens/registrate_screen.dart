@@ -15,6 +15,7 @@ class MakeParol extends StatefulWidget {
 
 class _MakeParolState extends State<MakeParol> {
   List<bool> circles = [false, false, false, false];
+  String parol = "";
   int _index = -1;
 
   @override
@@ -153,6 +154,7 @@ class _MakeParolState extends State<MakeParol> {
           if (_index != 4) {
             _index++;
             circles[_index] = true;
+            parol += text;
           } else {
             //! переход на другой экран
           }
@@ -190,7 +192,7 @@ class _MakeParolState extends State<MakeParol> {
 //       notifyListeners();
 //     } else {
 //       if (_passwordParol.length == 4) {
-//         // Navigator.push(context, MaterialPageRoute(builder: (context) => ,))
+//         //* Navigator.push(context, MaterialPageRoute(builder: (context) => ,))
 //       }
 //     }
 //   }

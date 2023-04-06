@@ -16,6 +16,7 @@ class WriteCode extends StatefulWidget {
 class _WriteCodeState extends State<WriteCode> {
   int _start = 60;
   Timer? _timer;
+  String code = "";
   final _codeControllers = [
     TextEditingController(),
     TextEditingController(),
@@ -88,16 +89,17 @@ class _WriteCodeState extends State<WriteCode> {
                       width: 50,
                       height: 50,
                       child: TextField(
+                        controller: _codeControllers[index - 1],
                         keyboardType: TextInputType.number,
                         maxLength: 1,
                         onChanged: (value) async {
-                          var code = "";
                           if (value.isNotEmpty) {
                             var currentTextFields =
                                 _codeControllers //! уточнить по поводу того
                                     .map((controller) => controller
                                         .text) //!  как именно строка сохраняет
                                     .toList(); //! текущее значение поля для ввода кода
+
                             if (currentTextFields
                                 .every((text) => text.isNotEmpty)) {
                               code = currentTextFields.join();
@@ -106,18 +108,17 @@ class _WriteCodeState extends State<WriteCode> {
                               FocusScope.of(context).nextFocus();
                             } else {
                               FocusScope.of(context).unfocus();
-                              context
+
+                              await context
                                   .read<WriteCodeViewModel>()
                                   .signIn(widget.email, code);
-                              // if () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MakeParol(),
-                                  ));
-                              // } else {
-                              // currentTextFields = [];
-                              // }
+                              if (context.read<WriteCodeViewModel>().isValid) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MakeParol(),
+                                    ));
+                              }
                             }
                           }
                         },
