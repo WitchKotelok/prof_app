@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -147,13 +148,14 @@ class _MakeParolState extends State<MakeParol> {
       ),
       child: TextButton(
         onPressed: () {
+          addPasswordDigits(text, context);
+          setState(() {});
           if (_index != 4) {
             _index++;
             circles[_index] = true;
           } else {
             //! переход на другой экран
           }
-          setState(() {});
           // if (text.isNotEmpty) {
           //   model.addPasswordDigits(text, context);
           // } else {
@@ -176,26 +178,20 @@ class _MakeParolState extends State<MakeParol> {
 }
 
 // class PasswordModel extends ChangeNotifier {
-//   List<String> _passwordDigits = [];
+//   List<String> _passwordParol = [];
 
 //   bool isFilled(int index) {
-//     return _passwordDigits.length > index;
+//     return _passwordParol.length == index + 1;
 //   }
 
-//   void addPasswordDigits(String digit, BuildContext context) {
-//     if (_passwordDigits.length < 4) {
-//       _passwordDigits.add(digit);
+//   void addPasswordParol(String symbol, BuildContext context) {
+//     if (_passwordParol.length < 4) {
+//       _passwordParol.add(symbol);
 //       notifyListeners();
-//       if (_passwordDigits.length == 4) {
-//         //! здесь должен быть переход на экран заполнения профиля
+//     } else {
+//       if (_passwordParol.length == 4) {
+//         // Navigator.push(context, MaterialPageRoute(builder: (context) => ,))
 //       }
-//     }
-//   }
-
-//   void removePasswordDigit() {
-//     if (_passwordDigits.isNotEmpty) {
-//       _passwordDigits.removeLast();
-//       notifyListeners();
 //     }
 //   }
 // }

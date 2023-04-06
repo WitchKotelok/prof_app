@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodels/write_code_viewmodel.dart';
+import 'registrate_screen.dart';
 
 class WriteCode extends StatefulWidget {
   final String email;
-  WriteCode({Key? key, required this.email}) : super(key: key);
+  const WriteCode({Key? key, required this.email}) : super(key: key);
 
   @override
   State<WriteCode> createState() => _WriteCodeState();
@@ -108,6 +109,15 @@ class _WriteCodeState extends State<WriteCode> {
                               context
                                   .read<WriteCodeViewModel>()
                                   .signIn(widget.email, code);
+                              // if () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MakeParol(),
+                                  ));
+                              // } else {
+                              // currentTextFields = [];
+                              // }
                             }
                           }
                         },

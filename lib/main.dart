@@ -15,6 +15,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => WelcomeScreenViewModel()),
         ChangeNotifierProvider(create: (_) => WriteCodeViewModel()),
       ],
+      child: MyApp(),
     ),
   );
 }

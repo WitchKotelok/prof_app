@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,12 +16,11 @@ class WriteCodeViewModel extends ChangeNotifier {
       "email": email,
       "code": code,
     }; // сохраняет в себя в качестве библиотеки(?) значеня email и кода
-    final response = http.post(
+    final response = await http.post(
         Uri.parse('https://medic.madskill.ru/api/signin'),
         headers: headers);
 
-    if (response == 200) {
-      //! statusCode не работает
+    if (response.statusCode == 200) {
       setValid(true);
     } else {
       setValid(false);
