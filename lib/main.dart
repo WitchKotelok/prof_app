@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prof_app/screens/first_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:prof_app/viewmodels/login_form.dart';
@@ -7,6 +8,7 @@ import 'package:prof_app/viewmodels/write_code_viewmodel.dart';
 import 'screens/welcome_page.dart';
 import 'screens/write_code.dart';
 import 'screens/registrate_screen.dart';
+import 'screens/first_screen.dart';
 
 void main() {
   runApp(
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(body: MyHomePage()),
+      home: Scaffold(body: FirstScreen()),
     );
   }
 }
