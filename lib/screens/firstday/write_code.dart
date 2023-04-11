@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../viewmodels/write_code_viewmodel.dart';
+import '../../viewmodels/write_code_viewmodel.dart';
 import 'registrate_screen.dart';
 
 class WriteCode extends StatefulWidget {

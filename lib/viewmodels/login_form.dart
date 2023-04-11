@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:prof_app/screens/write_code.dart';
+import 'package:prof_app/screens/firstday/write_code.dart';
 import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
